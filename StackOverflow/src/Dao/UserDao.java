@@ -4,11 +4,12 @@ import models.User;
 
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class UserDao {
 
-    HashMap<String, User> userMap = new HashMap<>();
+    ConcurrentHashMap<String, User> userMap = new ConcurrentHashMap<>();
 
 
     public User getUser(String userId){

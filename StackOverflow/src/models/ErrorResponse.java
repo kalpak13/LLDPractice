@@ -8,4 +8,20 @@ public class ErrorResponse implements ResponseClass{
         this.Message = message;
         this.code = code;
     }
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public String toString() {
+        return "ErrorResponse{" +
+                "message='" + Message + '\'' +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }

@@ -3,9 +3,10 @@ package Dao;
 import models.Comment;
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CommentDao {
-    HashMap<String, Comment> commentMap = new HashMap<>();
+    ConcurrentHashMap<String, Comment> commentMap = new ConcurrentHashMap<>();
 
     public Comment getComment(String commentId){
         return commentMap.get(commentId);

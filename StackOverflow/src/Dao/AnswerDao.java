@@ -3,9 +3,10 @@ package Dao;
 import models.Answer;
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class AnswerDao {
-    HashMap<String, Answer> answerMap = new HashMap<>();
+    ConcurrentHashMap<String, Answer> answerMap = new ConcurrentHashMap<>();
 
     public Boolean answerExists(String answerId){
         return answerMap.containsKey(answerId);
@@ -21,5 +22,10 @@ public class AnswerDao {
             return null;
         }
         return answerMap.get(answerId);
+    }
+
+    public Boolean upVote(String id){
+        answerMap.get(id).upVote();
+        return true;
     }
 }

@@ -21,4 +21,13 @@ public class Answer extends PostObject{
         return answer;
     }
 
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "answerId='" + answerId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", parentPostId='" + parentPostId + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
 }
