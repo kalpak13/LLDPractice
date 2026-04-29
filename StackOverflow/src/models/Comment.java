@@ -24,4 +24,14 @@ public class Comment {
     public String getComment(){
         return comment;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentId='" + commentId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", parentId='" + parentId + '\'' +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }

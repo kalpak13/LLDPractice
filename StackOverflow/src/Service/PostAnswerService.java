@@ -3,12 +3,15 @@ package Service;
 import Dao.AnswerDao;
 import models.Answer;
 
-import Exception.InvalidPostException;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class PostAnswerService {
 
     AnswerDao answerDao;
+    Map<String, Set<String>> answerToVotersMap = new ConcurrentHashMap<>();
     private final ReentrantLock lock = new ReentrantLock();
     public PostAnswerService(){
         this.answerDao = new AnswerDao();
@@ -34,8 +37,15 @@ public class PostAnswerService {
         return answerDao.getAnswer(answerId);
     }
 
-    public Boolean upVote(String id){
+    public Boolean upVote(String userId, String id){
         if(!answerExists(id)) return false;
+        if(getAnswer(id).getUserId().equals(userId)) return false;
+
+       Set<String> voters = answerToVotersMap.computeIfAbsent(id, k -> ConcurrentHashMap.newKeySet());
+       if(!voters.add(userId)){
+           return false;
+       }
+
        lock.lock();
        try{
            answerDao.upVote(id);

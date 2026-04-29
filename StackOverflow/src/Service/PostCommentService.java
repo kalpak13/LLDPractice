@@ -14,6 +14,9 @@ public class PostCommentService {
     }
 
    public Comment postComment(String userId, String comment, String parentAnswerId){
+        if(comment == null || comment.isBlank()){
+            throw new IllegalArgumentException("Comment cannot be empty");
+        }
         lock.lock();
         try{
             Comment commentObject = new Comment(userId,comment,parentAnswerId);
@@ -23,5 +26,9 @@ public class PostCommentService {
         finally {
             lock.unlock();
         }
+   }
+
+   public Comment getComment(String commentId){
+        return commentDao.getComment(commentId);
    }
 }
